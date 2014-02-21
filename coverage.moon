@@ -45,14 +45,14 @@ position_to_lines = (file_content, positions) ->
 
 no_coverage = (line) ->
   nc = {
-    "^(%s*)$",
-    "^(%s*%-%-).*$",
-    "[:=]?%s*[-=]>%s*$",
-    "^%s*require",
-    "^%s*export",
-    "=?%s*class%s*",
-    "^%s*else%s*$",
-    "(%w+%s*=%s*)require%s*['\"(]",
+    "^(%s*)$", -- empty lines
+    "^(%s*%-%-).*$", -- comments
+    "[:=]?%s*[-=]>%s*$", -- function declaration
+    "^%s*export", -- export statements
+    "=?%s*class%s*", -- class statements
+    "^%s*else%s*$", -- else statements
+    "(%w+%s*=%s*)require%s*['\"(]", -- require statements
+    "%s*return%s*$", --empty return statement
   }
 
   for c in *nc
