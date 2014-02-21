@@ -61,12 +61,23 @@ class coveralls extends coverage.CodeCoverage
 		file_coverage = @file_coverage fname
 		return unless file_coverage
 		c = file_coverage.coverage
-		length = #c
-		for k, v in pairs c
-			length = k if k > length
 
-		for i = 1, length
-			file_coverage.coverage[i] = json.util.null if c[i] == nil
+		length = #c
+		if length == 0
+			i = 1
+			for line in io.lines fname
+				file_coverage.coverage[i] = if coveralls.no_coverage(line)
+						json.util.null
+					else
+						0
+				i += 1
+		else
+			for k, v in pairs c
+				length = k if k > length
+
+			for i = 1, length
+				file_coverage.coverage[i] = json.util.null if c[i] == nil
+
 
 		table.insert @source_files, file_coverage
 
