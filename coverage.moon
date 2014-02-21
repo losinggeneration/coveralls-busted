@@ -56,7 +56,7 @@ no_coverage = (line) ->
   }
 
   for c in *nc
-    return true if c
+    return true if line\match c
 
   false
 
@@ -128,6 +128,9 @@ class CodeCoverage
   file_coverage: (fname) =>
     @process_positions!
     file_coverage fname, @positions[fname]
+
+  no_coverage: (line) ->
+    no_coverage line
 
   format_file: (fname) =>
     @process_positions!
