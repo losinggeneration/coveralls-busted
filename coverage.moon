@@ -47,6 +47,9 @@ no_coverage = (line) ->
   nc = {
     "^(%s*)$", -- empty lines
     "^(%s*%-%-).*$", -- comments
+    "%s*=%s*{", -- Table declaration
+    "%s*%w+%s*:%s*", -- Inner table
+    "^%s*}%s*$", -- End of table declaration
     "[:=]?%s*[-=]>%s*$", -- function declaration
     "^%s*export", -- export statements
     "=?%s*class%s*", -- class statements
