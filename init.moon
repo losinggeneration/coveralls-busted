@@ -66,7 +66,7 @@ class coveralls extends coverage.CodeCoverage
 		if length == 0
 			i = 1
 			for line in io.lines fname
-				file_coverage.coverage[i] = if coveralls.no_coverage(line)
+				c[i] = if coveralls.no_coverage(line)
 						json.util.null
 					else
 						0
@@ -79,7 +79,7 @@ class coveralls extends coverage.CodeCoverage
 				file_coverage.coverage[i] = json.util.null if c[i] == nil
 
 
-		table.insert @source_files, file_coverage
+		table.insert @source_files, file_coverage if #c > 0
 
 	send: =>
 		if not @service_job_id
