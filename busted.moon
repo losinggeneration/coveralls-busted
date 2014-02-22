@@ -1,4 +1,4 @@
-require "coveralls.init"
+require "coveralls.coveralls"
 
 output = ->
 	Coveralls.service_name = Coveralls.Local if os.getenv 'LOCAL'
