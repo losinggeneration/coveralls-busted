@@ -1,8 +1,8 @@
-# Coveralls support for Busted with Moonscript
+## Coveralls support for Busted with Moonscript
 
 This allows you to use Coveralls with Busted and your Moonscript project.
 
-## Usage
+### Usage
 You have a couple options. The easiest is to tell Coveralls where your source
 is located from within one of your Busted test files:
 ```moonscript
