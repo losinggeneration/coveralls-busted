@@ -13,7 +13,7 @@ output = ->
 
 	defout.formatted_status = (statuses, options, ms) ->
 		Coveralls\stop!
-		Coveralls\coverDir Coveralls.dirname, Coveralls.ext
+		Coveralls\coverDir Coveralls.dirname, Coveralls.ext if Coveralls.dirname != ""
 		Coveralls\send!
 		return formatted_status statuses, options, ms if formatted_status
 

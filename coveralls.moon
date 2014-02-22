@@ -47,7 +47,7 @@ class coveralls extends coverage.CodeCoverage
 		-- your repository's page on Coveralls.
 		@repo_token = nil
 
-		@dirname = './src'
+		@dirname = ''
 		@ext = '*.moon'
 
 		super!
