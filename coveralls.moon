@@ -47,12 +47,12 @@ class coveralls extends coverage.CodeCoverage
 		-- your repository's page on Coveralls.
 		@repo_token = nil
 
-		@dirname = 'src'
-		@ext = '*.lua'
+		@dirname = './src'
+		@ext = '*.moon'
 
 		super!
 
-	coverDir: (dirname, ext = '*.lua') =>
+	coverDir: (dirname, ext = '*.moon') =>
 		dir = require "pl.dir"
 		@cover f for f in *(dir.getfiles dirname, ext)
 		@coverDir d, ext for d in *(dir.getdirectories dirname)
