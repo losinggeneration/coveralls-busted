@@ -38,7 +38,7 @@ class coveralls extends coverage.CodeCoverage
 	Debug: "debug"
 
 	new: =>
-		@source_files = {}
+		@__source_files = {}
 		-- The continuous integration service
 		@service_name = @@Travis
 		-- The continuous integration service job id
@@ -49,6 +49,7 @@ class coveralls extends coverage.CodeCoverage
 
 		@dirname = ''
 		@ext = '*.moon'
+		@srcs = {}
 
 		super!
 
@@ -79,9 +80,13 @@ class coveralls extends coverage.CodeCoverage
 				file_coverage.coverage[i] = json.util.null if c[i] == nil
 
 
-		table.insert @source_files, file_coverage if #c > 0
+		table.insert @__source_files, file_coverage if #c > 0
 
 	send: =>
+		if #@__source_files == 0
+			print "\nNo source files to send to Coveralls"
+			return
+
 		if not @service_job_id
 			env = nil
 			switch @service_name
@@ -97,12 +102,12 @@ class coveralls extends coverage.CodeCoverage
 					return
 				when @@Debug
 					moon = require "moon"
-					moon.p @source_files
+					moon.p @__source_files
 					json_data = json.encode {
 						service_name: @service_name,
 						service_job_id: @service_job_id,
 						repo_token: @repo_token,
-						source_files: @source_files,
+						source_files: @__source_files,
 					}
 					print json_data
 					print #json_data
@@ -120,7 +125,7 @@ class coveralls extends coverage.CodeCoverage
 				service_name: @service_name,
 				service_job_id: @service_job_id,
 				repo_token: @repo_token,
-				source_files: @source_files,
+				source_files: @__source_files,
 			}
 		}
 
