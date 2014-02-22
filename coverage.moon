@@ -51,8 +51,8 @@ no_coverage = (line) ->
     "^%s*export", -- export statements
     "=?%s*class%s*", -- class statements
     "^%s*else%s*$", -- else statements
-    "(%w+%s*=%s*)require%s*['\"(]", -- require statements
-    "%s*return%s*$", --empty return statement
+    "(%s*=?%s*)require%s*['\"(]", -- require statements
+    "%s*return%s*$", -- empty return statement
   }
 
   for c in *nc
