@@ -24,7 +24,7 @@ Coveralls.dirname = './path_to_src' -- Currently the ./ is important to include
 -- Coveralls.repo_token
 -- Your Coveralls repo token on your project page (though, you don't want this
 -- to be public.)
-``
+```
 You should then call busted -o coveralls/busted.lua from your continuous integration environment. However, make sure moonc coveralls/busted.moon is called before the call to busted.
 
 You can also specify which source files (relative path) you want in the Coveralls.srcs table.
