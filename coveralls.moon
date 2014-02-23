@@ -139,13 +139,13 @@ class coveralls extends coverage.CodeCoverage
 			if body\match "^<"
 				print "Coveralls returned HTML. This shouldn't happen. Trying again in 30 seconds"
 				retry += 1
-				return 500, {message: "Error talking to Coveralls. Service may be unavailable"} if retry > 5
+				return 500, "Failed to get a correct response from coveralls.io", {message: "Service may be unavailable"} if retry > 5
 				socket.select(nil, nil, 30)
 				return send!
 
-			code, json.decode body
+			code, status, json.decode body
 
-		code, msg = send!
+		code, status, msg = send!
 
 		assert code == 200, string.format "Error updating Coveralls: (status: %s) (response: %s)", status, msg.message
 		print msg.url
