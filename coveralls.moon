@@ -131,11 +131,15 @@ class coveralls extends coverage.CodeCoverage
 
 		https = require "ssl.https"
 		require "socket"
+		retry = 0
 		send = ->
 			body, code, headers, status = https.request 'https://coveralls.io/api/v1/jobs', form_data
 
 			-- HTML response. sleep 30 seconds and try again
 			if body\match "^<"
+				print "Coveralls returned HTML. This shouldn't happen. Trying again in 30 seconds"
+				retry += 1
+				return 500, {message: "Error talking to Coveralls. Service may be unavailable"} if retry > 5
 				socket.select(nil, nil, 30)
 				return send!
 
