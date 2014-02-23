@@ -130,9 +130,18 @@ class coveralls extends coverage.CodeCoverage
 		}
 
 		https = require "ssl.https"
-		body, code, headers, status = https.request 'https://coveralls.io/api/v1/jobs', form_data
+		require "socket"
+		send = ->
+			body, code, headers, status = https.request 'https://coveralls.io/api/v1/jobs', form_data
 
-		msg = json.decode body
+			-- HTML response. sleep 30 seconds and try again
+			if body\match "^<"
+				socket.select(nil, nil, 30)
+				return send!
+
+			code, json.decode body
+
+		code, msg = send!
 
 		assert code == 200, string.format "Error updating Coveralls: (status: %s) (response: %s)", status, msg.message
 		print msg.url
