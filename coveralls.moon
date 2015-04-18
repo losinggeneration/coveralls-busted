@@ -151,3 +151,5 @@ class coveralls extends coverage.CodeCoverage
 		print msg.url
 
 Coveralls = coveralls!
+
+{ :Coveralls }
