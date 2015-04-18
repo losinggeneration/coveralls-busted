@@ -49,7 +49,6 @@ class coveralls extends coverage.CodeCoverage
 
 		@dirname = ''
 		@ext = '*.moon'
-		@srcs = {}
 
 		super!
 
@@ -81,6 +80,8 @@ class coveralls extends coverage.CodeCoverage
 
 
 		table.insert @__source_files, file_coverage if #c > 0
+
+	srcs: => @__source_files
 
 	send: =>
 		if #@__source_files == 0

@@ -12,7 +12,7 @@ coverallsStart = ->
 coverallsEnd = ->
 	Coveralls\stop!
 	Coveralls\coverDir Coveralls.dirname, Coveralls.ext if Coveralls.dirname != ""
-	Coveralls\cover src for src in *Coveralls.srcs
+	Coveralls\cover src["name"] for src in *Coveralls\srcs!
 	Coveralls\send!
 
 	return nil, true

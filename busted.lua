@@ -19,10 +19,10 @@ coverallsEnd = function()
   if Coveralls.dirname ~= "" then
     Coveralls:coverDir(Coveralls.dirname, Coveralls.ext)
   end
-  local _list_0 = Coveralls.srcs
+  local _list_0 = Coveralls:srcs()
   for _index_0 = 1, #_list_0 do
     local src = _list_0[_index_0]
-    Coveralls:cover(src)
+    Coveralls:cover(src["name"])
   end
   Coveralls:send()
   return nil, true
