@@ -1,5 +1,5 @@
 local Coveralls
-Coveralls = require("coveralls").Coveralls
+Coveralls = require("coveralls.coveralls").Coveralls
 local busted = require('busted')
 local handler = assert(require("busted.outputHandlers.base"))
 if os.getenv('LOCAL') then
@@ -10,25 +10,21 @@ if os.getenv('COVERALLS_DEBUG') then
 end
 local coverallsTestStart
 coverallsTestStart = function()
-  print("coveralls test start")
   Coveralls:start()
   return nil, true
 end
 local coverallsTestEnd
 coverallsTestEnd = function()
-  print("coveralls test end")
   Coveralls:stop()
   return nil, true
 end
 local coverallsSuiteStart
 coverallsSuiteStart = function()
-  print("coveralls suite start")
   Coveralls:start()
   return nil, true
 end
 local coverallsSuiteEnd
 coverallsSuiteEnd = function()
-  print("coveralls suite end")
   Coveralls:stop()
   local moon = require("moon")
   local _
@@ -60,4 +56,12 @@ busted.subscribe({
   'suite',
   'end'
 }, coverallsSuiteEnd)
+busted.subscribe({
+  'test',
+  'start'
+}, coverallsTestStart)
+busted.subscribe({
+  'test',
+  'end'
+}, coverallsTestEnd)
 return handler
