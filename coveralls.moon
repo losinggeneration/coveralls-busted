@@ -49,6 +49,7 @@ class coveralls extends coverage.CodeCoverage
 
 		@dirname = ''
 		@ext = '*.moon'
+		@srcs = {}
 
 		super!
 
@@ -67,9 +68,9 @@ class coveralls extends coverage.CodeCoverage
 			i = 1
 			for line in io.lines fname
 				c[i] = if coveralls.no_coverage(line)
-						json.util.null
-					else
-						0
+					json.util.null
+				else
+					0
 				i += 1
 		else
 			for k, v in pairs c
@@ -78,10 +79,7 @@ class coveralls extends coverage.CodeCoverage
 			for i = 1, length
 				file_coverage.coverage[i] = json.util.null if c[i] == nil
 
-
 		table.insert @__source_files, file_coverage if #c > 0
-
-	srcs: => @__source_files
 
 	send: =>
 		if #@__source_files == 0

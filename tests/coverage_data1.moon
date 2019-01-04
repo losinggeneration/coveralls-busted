@@ -13,8 +13,8 @@ class F
 		if @x
 			@x
 	test3: => if @x
-			@x
-		else
-			@x
+		@x
+	else
+		@x
 
 { :x, :F }
